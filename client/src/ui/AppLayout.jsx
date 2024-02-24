@@ -15,7 +15,7 @@ function AppLayout() {
         backgroundPosition: "center",
       }}
     >
-      <header className="flex h-max w-full  justify-between  px-4 py-4 md:p-4">
+      <header className="relative z-10 flex h-max  w-full  justify-between px-4 py-4 md:p-4">
         <Link to="/">
           {" "}
           <div className=" my-auto flex h-12 items-center justify-center gap-x-2">
