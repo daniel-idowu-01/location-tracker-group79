@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 
-const Input = ({ label, type, value, onChange, placeHolder, className }) => {
+const Input = ({ icon,label, type, value, onChange, placeHolder, className }) => {
   return (
     <div className="mb-4 flex w-full flex-col items-start gap-1 last-of-type:mb-0">
-      <label htmlFor={label} className="text-sm capitalize text-zinc-500">
+      <label htmlFor={label} className="flex gap-2 text-sm capitalize text-zinc-500">
+        <div className="text-blue-400 py-1">{icon}</div>
         {label}
       </label>
       <input
