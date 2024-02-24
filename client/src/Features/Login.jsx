@@ -1,14 +1,18 @@
 import { Link } from "react-router-dom";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
+import { FaTimes } from "react-icons/fa";
 
 const Login = () => {
   return (
-    <div className=" flex h-[430px] w-full max-w-[380px] flex-col items-center justify-center gap-y-2 rounded-md bg-gray-800 px-4 py-5 text-center">
+    <div className="relative flex h-[430px] w-full max-w-[380px] flex-col items-center justify-center gap-y-2 rounded-md bg-gray-800 px-4 py-5 text-center">
+      <Link to="/" className="absolute top-0 right-0 p-3">
+        <FaTimes className="text-gray-300" />
+      </Link>
       <h1 className="text-2xl font-semibold text-zinc-200">
         Login to Pawprints
       </h1>
-      <p className=" mb-[-10px] text-sm text-zinc-500">Not registered?</p>
+      <p className="mb-[-10px] text-sm text-zinc-500">Not registered?</p>
       <Link to="/register" className="mt-0 block text-blue-400 underline">
         Create Account here
       </Link>

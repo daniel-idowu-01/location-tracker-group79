@@ -1,5 +1,10 @@
-const RegisterPage = () => {
-  return <div>RegisterPage</div>;
-};
+import Register from "../Features/Register";
 
+const RegisterPage = () => {
+  return (
+    <>
+      <Register />
+    </>
+  );
+};
 export default RegisterPage;
