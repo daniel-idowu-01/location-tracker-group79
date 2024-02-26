@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 
 import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
@@ -6,6 +10,8 @@ import RegisterPage from "./Pages/RegisterPage";
 import Error from "./Pages/Error";
 import AppLayout from "./ui/AppLayout";
 import Dashboard from "./Pages/Dashboard";
+import Destinations from "./Pages/Destinations";
+import Info from "./Pages/Info";
 
 const App = () => {
   const route = createBrowserRouter([
@@ -24,15 +30,20 @@ const App = () => {
           path: "register",
           element: <RegisterPage />,
         },
-        {
-          path: "*",
-          element: <Error />,
-        },
       ],
     },
     {
       path: "dashboard",
       element: <Dashboard />,
+      index: <Navigate to={<Destinations />} />,
+      children: [
+        { path: "locations", element: <Destinations /> },
+        { path: "info", element: <Info /> },
+      ],
+    },
+    {
+      path: "*",
+      element: <Error />,
     },
   ]);
 
