@@ -26,7 +26,7 @@ function AppLayout() {
           </div>
         </Link>
 
-        <LinkButton to="login" label="login" className="py-1" />
+        <LinkButton to="/login" label="login" className="py-1" />
       </header>
       <main
         className="flex w-full items-center justify-center p-3 md:p-4"

@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Input from '../ui/Input';
 import Button from '../ui/Button';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
-import Error from '../Pages/Error';
-
+//import Error from '../Pages/Error';
 import Input from "../ui/Input";
-import Button from "../ui/Button";
 
-import { emailValidator, passwordValidator } from "../utils/inputValidation";
-import { useEffect, useState } from "react";
+//import { emailValidator, passwordValidator } from "../utils/inputValidation";
+//import { useEffect, useState } from "react";
 
 const Login = () => {
   const [email, setEmail] = useState('');
