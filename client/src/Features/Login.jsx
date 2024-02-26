@@ -5,6 +5,12 @@ import Button from '../ui/Button';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
 import Error from '../Pages/Error';
 
+import Input from "../ui/Input";
+import Button from "../ui/Button";
+
+import { emailValidator, passwordValidator } from "../utils/inputValidation";
+import { useEffect, useState } from "react";
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
