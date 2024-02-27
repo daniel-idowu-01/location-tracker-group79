@@ -35,8 +35,8 @@ const App = () => {
     {
       path: "dashboard",
       element: <Dashboard />,
-      index: <Navigate to={<Destinations />} />,
       children: [
+        { index: true, element: <Navigate to="locations" /> },
         { path: "locations", element: <Destinations /> },
         { path: "info", element: <Info /> },
       ],
