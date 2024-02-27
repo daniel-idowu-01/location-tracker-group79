@@ -1,107 +1,155 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Input from '../ui/Input';
-import Button from '../ui/Button';
-import { FaEnvelope, FaLock, FaUser } from 'react-icons/fa';
-import Error from '../Pages/Error';
+import { Link } from "react-router-dom";
+import Input from "../ui/Input";
+import Button from "../ui/Button";
+import { FaEnvelope, FaLock, FaTimes, FaUser } from "react-icons/fa";
+import { useState } from "react";
 
 const Register = () => {
-  const [fullName, setFullName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [fullNameError, setFullNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
-  const handleRegister = (e) => {
+  const handleFullNameChange = (e) => {
+    setFullName(e.target.value.trim());
+    setFullNameError(""); 
+  };
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value.trim());
+    setEmailError("");
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value.trim());
+    setPasswordError(""); 
+  };
+
+  const handleConfirmPasswordChange = (e) => {
+    setConfirmPassword(e.target.value.trim());
+    setConfirmPasswordError(""); 
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    let errors = [];
 
+    let requiredFields = [];
     if (!fullName) {
-      errors.push('Full Name is required.');
+      setFullNameError("Full Name is required");
+      requiredFields.push("Full Name");
     }
-
     if (!email) {
-      errors.push('Email is required.');
+      setEmailError("Email is required");
+      requiredFields.push("Email");
+    } else if (!isValidEmail(email)) {
+      setEmailError("Please enter a valid email address");
     }
-
     if (!password) {
-      errors.push('Password is required.');
+      setPasswordError("Password is required");
+      requiredFields.push("Password");
+    } else if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters long");
     }
-
     if (!confirmPassword) {
-      errors.push('Confirm Password is required.');
+      setConfirmPasswordError("Confirm Password is required");
+      requiredFields.push("Confirm Password");
+    } else if (password !== confirmPassword) {
+      setConfirmPasswordError("Passwords do not match");
     }
 
-    if (errors.length === 1) {
-      setErrorMessage(errors[0]);
-    } else if (errors.length > 1) {
-      setErrorMessage('All fields are required.');
-    } else {
-      console.log('Full Name:', fullName);
-      console.log('Email:', email);
-      console.log('Password:', password);
-      console.log('Confirm Password:', confirmPassword);
-      setErrorMessage('');
+    if (requiredFields.length === 1) {
+      setFullNameError(`${requiredFields[0]} is required`);
+    } else if (requiredFields.length > 1) {
+      setFullNameError("All fields are required");
+    }
+
+    // Proceed with registration if all fields are filled correctly
+    if (
+      fullName &&
+      email &&
+      isValidEmail(email) &&
+      password &&
+      confirmPassword &&
+      password === confirmPassword
+    ) {
+      console.log("Registration successful");
     }
   };
 
-  const clearErrorMessage = () => {
-    setErrorMessage('');
+  // Email validation function
+  const isValidEmail = (email) => {
+    //email logic
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
 
   return (
-    <div className="relative flex h-[550px] w-full max-w-[380px] flex-col items-center my-12 justify-center gap-y-2 rounded-md bg-gray-800 px-4 py-5 text-center mt-2">
-      <h1 className="text-2xl font-semibold text-zinc-200">
-        Register to Pawprints
-      </h1>
-      <p className="mb-[-10px] text-sm text-zinc-500">Already have an account?</p>
-      <Link to="/login" className="mt-0 block text-blue-400 underline">
-        Please Log in
-      </Link>
-      {errorMessage && <Error message={errorMessage} onClose={clearErrorMessage} />}
-      <form onSubmit={handleRegister} className="w-full p-2">
-        <Input
-          icon={<FaUser />}
-          label="Full Name"
-          placeHolder="John Adam"
-          type="text"
-          value={fullName}
-          onChange={(e) => setFullName(e.target.value)}
-        />
-        <Input
-          icon={<FaEnvelope />}
-          label="Email"
-          placeHolder="abc@abc.com"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <Input
-          icon={<FaLock />}
-          label="Password"
-          placeHolder="******"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <Input
-          icon={<FaLock />}
-          label="Confirm Password"
-          placeHolder="******"
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <div className="flex items-center">
-          <input type="checkbox" id="rememberMe" className="mr-2" />
-          <label htmlFor="rememberMe" className="text-sm text-zinc-500">
-            Remember Me
-          </label>
-        </div>
-        <Button type="submit" className="mt-6 h-10 w-full font-semibold uppercase text-zinc-50 md:h-10">
-          Register
-        </Button>
-      </form>
+    <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
+      <div className="relative my-12 mt-2 flex h-[550px] w-full max-w-[380px] flex-col items-center justify-center gap-y-2 rounded-md bg-gray-800 px-4 py-5 text-center transition-transform duration-500 ease-in">
+        <Link to="/" className="absolute right-0 top-0 p-3">
+          <FaTimes className="text-gray-300" />
+        </Link>
+        <h1 className="text-2xl font-semibold text-zinc-200">
+          Register to Pawprints
+        </h1>
+        <p className="mb-[-10px] text-sm text-zinc-500">
+          Already have an account?
+        </p>
+        <Link to="/login" className="mt-0 block text-blue-400 underline">
+          Please Log in
+        </Link>
+        <form action="" className="w-full p-2" onSubmit={handleSubmit}>
+          <Input
+            label="Full Name"
+            icon={<FaUser />}
+            placeHolder="John Adam"
+            type="text"
+            value={fullName}
+            onChange={handleFullNameChange}
+            errorMessage={fullNameError}
+          />
+          <Input
+            label="Email"
+            icon={<FaEnvelope />}
+            placeHolder="abc@abc.com"
+            type="email"
+            value={email}
+            onChange={handleEmailChange}
+            errorMessage={emailError}
+          />
+          <Input
+            label="Password"
+            icon={<FaLock />}
+            placeHolder="******"
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+            errorMessage={passwordError}
+          />
+          <Input
+            label="Confirm Password"
+            icon={<FaLock />}
+            placeHolder="******"
+            type="password"
+            value={confirmPassword}
+            onChange={handleConfirmPasswordChange}
+            errorMessage={confirmPasswordError}
+          />
+          <div className="flex items-center">
+            <input type="checkbox" id="rememberMe" className="mr-2" />
+            <label htmlFor="rememberMe" className="text-sm text-zinc-500">
+              Remember Me
+            </label>
+          </div>
+          <Button className="mt-6 h-10 w-full font-semibold uppercase text-zinc-50 md:h-10">
+            Register
+          </Button>
+        </form>
+      </div>
     </div>
   );
 };
