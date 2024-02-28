@@ -3,7 +3,7 @@ import SideBar from "../Features/SideBar";
 
 const DashboardLayout = () => {
   return (
-    <div className="flex h-screen w-full flex-col-reverse lg:flex-row">
+    <div className="flex h-screen w-full flex-col-reverse md:flex-row">
       <SideBar />
       <Map />
     </div>

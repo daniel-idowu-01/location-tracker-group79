@@ -4,8 +4,8 @@ import SidebarNav from "./SidebarNav";
 
 const SideBar = () => {
   return (
-    <aside className="flex h-1/2 w-full flex-col justify-start bg-gray-800 px-5 py-4 md:h-full lg:max-w-[400px]">
-      <Logo className="hidden lg:flex" />
+    <aside className="flex h-[45%] w-full flex-col justify-start overflow-hidden bg-gray-800 py-4 md:h-1/2 md:max-w-[350px] lg:h-full lg:max-w-[400px] ">
+      <Logo className="hidden md:flex" />
       <SidebarNav />
       <Outlet />
     </aside>
