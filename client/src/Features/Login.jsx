@@ -68,9 +68,6 @@ const Login = () => {
       <div
         className={`relative flex h-[430px] w-full max-w-[380px] flex-col items-center justify-center gap-y-2 rounded-md bg-gray-800 px-4 py-5 text-center transition-transform duration-500 ease-in ${isMounted ? "translate-y-0 opacity-100" : "translate-y-[30px] opacity-0"}`}
       >
-        <Link to="/" className="absolute right-0 top-0 p-3">
-          <FaTimes className="text-gray-300" />
-        </Link>
         <h1 className="text-2xl font-semibold text-zinc-200">
           Login to Pawprints
         </h1>
@@ -110,3 +107,12 @@ const Login = () => {
 };
 
 export default Login;
+
+
+
+/*
+if needed its here
+<Link to="/" className="absolute right-0 top-0 p-3">
+  <FaTimes className="text-gray-300" />
+</Link>
+*/

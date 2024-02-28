@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 import { FaEnvelope, FaLock, FaTimes, FaUser } from "react-icons/fa";
@@ -18,6 +18,8 @@ const Register = () => {
     setFullName(e.target.value.trim());
     setFullNameError(""); 
   };
+  
+  const navigate = useNavigate();
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value.trim());
@@ -76,7 +78,12 @@ const Register = () => {
       confirmPassword &&
       password === confirmPassword
     ) {
-      console.log("Registration successful");
+      console.log(fullName,'have successfully registerd')
+      setFullName("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+      navigate("/dashboard");
     }
   };
 
@@ -89,10 +96,7 @@ const Register = () => {
 
   return (
     <div className="absolute left-0 top-0 flex h-full w-full items-center justify-center">
-      <div className="relative my-12 mt-2 flex h-[550px] w-full max-w-[380px] flex-col items-center justify-center gap-y-2 rounded-md bg-gray-800 px-4 py-5 text-center transition-transform duration-500 ease-in">
-        <Link to="/" className="absolute right-0 top-0 p-3">
-          <FaTimes className="text-gray-300" />
-        </Link>
+      <div className="relative overflowscroll-y my-3 mt-2 flex h-[550px] w-full max-w-[380px] flex-col items-center justify-center gap-y-2 rounded-md bg-gray-800 px-4 py-5 text-center transition-transform duration-500 ease-in">
         <h1 className="text-2xl font-semibold text-zinc-200">
           Register to Pawprints
         </h1>
@@ -145,7 +149,7 @@ const Register = () => {
               Remember Me
             </label>
           </div>
-          <Button className="mt-6 h-10 w-full font-semibold uppercase text-zinc-50 md:h-10">
+          <Button type="submit" className="mt-6 h-10 w-full font-semibold uppercase text-zinc-50 md:h-10">
             Register
           </Button>
         </form>
