@@ -8,7 +8,7 @@ const Home = () => {
           {" "}
           Wherever you roam, PawPrints keeps you in the loop.
         </span>{" "}
-        <span className="block text-lg font-medium text-zinc-200">
+        <span className="block text-sm font-medium text-zinc-200 md:text-base">
           Track your adventures, big or small, and never miss a beat. Let&apos;s
           journey together! Start your journey with PawPrints today and unlock a
           world of unforgettable experiences.

@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -7,9 +8,13 @@ import {
   useMapEvents,
 } from "react-leaflet";
 import { useGeolocation } from "../hooks/useGeolocationApi";
-import { useEffect, useState } from "react";
-import { useUrlPosition } from "../hooks/useUrlPosition";
 import { useSearchParams } from "react-router-dom";
+import { FaLocationDot } from "react-icons/fa6";
+
+import { useUrlPosition } from "../hooks/useUrlPosition";
+import Button from "../ui/Button";
+import User from "./User";
+// import toast from "react-hot-toast";
 
 const Map = () => {
   const [mapPosition, setMapPosition] = useState([
@@ -33,18 +38,29 @@ const Map = () => {
   );
 
   useEffect(() => {
-    if (position) {
+    if (position && position.lat && position.lng) {
       setMapPosition([position.lat, position.lng]);
     }
   }, [position]);
 
   return (
-    <div className="h-1/2 w-full bg-gray-800 md:h-full">
+    <div className="relative h-[55%] w-full overflow-hidden bg-gray-800 md:h-full">
+      <div className=" flex h-[50px] items-center justify-end gap-x-4 bg-white px-5 py-4 shadow-lg">
+        <Button className="space-x-1 bg-inherit text-sm hover:bg-inherit md:text-base">
+          <span className=" flex items-center justify-center gap-x-1 text-zinc-600 ">
+            <FaLocationDot />
+            Add current Location
+          </span>
+        </Button>
+
+        <User />
+      </div>
       <MapContainer
         center={mapPosition}
         zoom={8}
         scrollWheelZoom={true}
-        className="h-full"
+        className=""
+        style={{ height: "calc(100% - 50px)" }}
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
