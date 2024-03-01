@@ -7,7 +7,7 @@ import {
 import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
-import Error from "./Pages/Error";
+import ErrorPage from "./Pages/ErrorPage";
 import AppLayout from "./ui/AppLayout";
 import Dashboard from "./Pages/Dashboard";
 import Destinations from "./Pages/Destinations";
@@ -44,7 +44,7 @@ const App = () => {
     },
     {
       path: "*",
-      element: <Error />,
+      element: <ErrorPage />,
     },
   ]);
 
