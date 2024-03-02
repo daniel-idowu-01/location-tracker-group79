@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { FaTimes } from "react-icons/fa";
+import { FaEnvelope, FaLock } from "react-icons/fa";
 
 import Input from "../ui/Input";
 import Button from "../ui/Button";
@@ -59,9 +59,6 @@ const Login = () => {
       <div
         className={`relative flex h-[430px] w-full max-w-[380px] flex-col items-center justify-center gap-y-2 rounded-md bg-gray-800 px-4 py-5 text-center transition-transform duration-500 ease-in ${isMounted ? "translate-y-0 opacity-100" : "translate-y-[30px] opacity-0"}`}
       >
-        <Link to="/" className="absolute right-0 top-0 p-3">
-          <FaTimes className="text-gray-300" />
-        </Link>
         <h1 className="text-2xl font-semibold text-zinc-200">
           Login to Pawprints
         </h1>
@@ -72,6 +69,7 @@ const Login = () => {
         <form action="" className="w-full p-2" onSubmit={handleSubmit}>
           <Input
             label="Email"
+            icon={<FaEnvelope/>}
             placeHolder="abc@abc.com"
             type="email"
             validateOnBlur={true}
@@ -82,6 +80,7 @@ const Login = () => {
           />
           <Input
             label="Password"
+            icon={<FaLock/>}
             placeHolder="******"
             type="password"
             validateOnBlur={true}

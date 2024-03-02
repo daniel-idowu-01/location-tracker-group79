@@ -46,7 +46,9 @@ const Input = ({
     <div className="mb-4 flex w-full flex-col items-start gap-1 last-of-type:mb-0">
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center justify-start gap-1">
+          <div className="block py-1 text-blue-400"> 
           {icon}
+          </div>
           <label htmlFor={label} className="text-sm capitalize text-zinc-500">
             {label}
           </label>

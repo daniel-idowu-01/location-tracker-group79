@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { FaTimes } from "react-icons/fa";
+import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
 import Input from "../ui/Input";
 import Button from "../ui/Button";
 import { emailValidator, passwordValidator, fullNameValidator, confirmPassWordValidator } from "../utils/inputValidation";
@@ -83,9 +83,6 @@ const Register = () => {
       <div
         className={`relative flex h-[550px] w-full max-w-[380px] flex-col items-center justify-center gap-y-2 rounded-md bg-gray-800 px-4 py-5 text-center transition-transform duration-500 ease-in ${isMounted ? "translate-y-0 opacity-100" : "translate-y-[30px] opacity-0"}`}
       >
-        <Link to="/" className="absolute right-0 top-0 p-3">
-          <FaTimes className="text-gray-300" />
-        </Link>
         <h1 className="text-2xl font-semibold text-zinc-200">
           Register to Pawprints
         </h1>
@@ -96,6 +93,7 @@ const Register = () => {
         <form action="" className="w-full p-2" onSubmit={handleSubmit}>
           <Input
             label="Full Name"
+            icon={<FaUser/>}
             placeHolder="John Adam"
             type="text"
             value={fullName}
@@ -104,6 +102,7 @@ const Register = () => {
           />
           <Input
             label="Email"
+            icon={<FaEnvelope/>}
             placeHolder="abc@abc.com"
             type="email"
             value={email}
@@ -112,6 +111,7 @@ const Register = () => {
           />
           <Input
             label="Password"
+            icon={<FaLock/>}
             placeHolder="******"
             type="password"
             value={password}
@@ -120,6 +120,7 @@ const Register = () => {
           />
           <Input
             label="Confirm Password"
+            icon={<FaLock/>}
             placeHolder="******"
             type="password"
             value={confirmPassword}
