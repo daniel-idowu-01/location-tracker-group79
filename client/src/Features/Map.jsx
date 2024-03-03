@@ -8,7 +8,7 @@ import {
   useMapEvents,
 } from "react-leaflet";
 import { useGeolocation } from "../hooks/useGeolocationApi";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FaLocationDot } from "react-icons/fa6";
 
 import { useUrlPosition } from "../hooks/useUrlPosition";
@@ -44,7 +44,7 @@ const Map = () => {
   }, [position]);
 
   return (
-    <div className="relative h-[55%] w-full overflow-hidden bg-gray-800 md:h-full">
+    <main className="relative h-[55%] w-full overflow-hidden bg-gray-800 md:h-full">
       <div className=" flex h-[50px] items-center justify-end gap-x-4 bg-white px-5 py-4 shadow-lg">
         <Button className="space-x-1 bg-inherit text-sm hover:bg-inherit md:text-base">
           <span className=" flex items-center justify-center gap-x-1 text-zinc-600 ">
@@ -74,7 +74,7 @@ const Map = () => {
         <ChangePosition position={mapPosition} />
         <DetectClick />
       </MapContainer>
-    </div>
+    </main>
   );
 };
 
@@ -84,10 +84,10 @@ function ChangePosition({ position }) {
 }
 
 function DetectClick() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
   useMapEvents({
     click: (e) => {
-      setSearchParams({ lat: e.latlng.lat, lng: e.latlng.lng });
+      navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`);
     },
   });
 }

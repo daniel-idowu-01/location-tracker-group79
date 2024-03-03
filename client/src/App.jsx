@@ -13,6 +13,7 @@ import Dashboard from "./Pages/Dashboard";
 import Destinations from "./Pages/Destinations";
 import Info from "./Pages/Info";
 import { Toaster } from "react-hot-toast";
+import AddLocation from "./Features/AddLocation";
 
 const App = () => {
   const route = createBrowserRouter([
@@ -40,6 +41,7 @@ const App = () => {
         { index: true, element: <Navigate to="locations" /> },
         { path: "locations", element: <Destinations /> },
         { path: "info", element: <Info /> },
+        { path: "form", element: <AddLocation /> },
       ],
     },
     {
