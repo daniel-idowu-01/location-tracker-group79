@@ -34,6 +34,7 @@ const AddLocation = () => {
       note,
       countryCode,
       principality,
+      position: { lat, lng },
     };
     console.log(newCity);
     navigate("/dashboard/locations");
@@ -102,7 +103,7 @@ const AddLocation = () => {
             id="date"
             onChange={(date) => setDate(date)}
             selected={date}
-            dateFormat="dd/mm/yyyy"
+            dateFormat="dd/MM/yyyy"
             className="h-8 w-full rounded-sm border-gray-300 bg-gray-300 px-3 py-3 text-zinc-700 outline-none focus:border-blue-400"
           />
         </div>

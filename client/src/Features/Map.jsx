@@ -26,9 +26,9 @@ const Map = () => {
 
   const [mapLat, mapLng] = useUrlPosition();
 
-  useEffect(() => {
-    getPosition();
-  }, [getPosition]);
+  // useEffect(() => {
+  //   getPosition();
+  // }, [getPosition]);
 
   useEffect(
     function () {
@@ -46,10 +46,13 @@ const Map = () => {
   return (
     <main className="relative h-[55%] w-full overflow-hidden bg-gray-800 md:h-full">
       <div className=" flex h-[50px] items-center justify-end gap-x-4 bg-white px-5 py-4 shadow-lg">
-        <Button className="space-x-1 bg-inherit text-sm hover:bg-inherit md:text-base">
+        <Button
+          className="space-x-1 bg-inherit text-sm hover:bg-inherit md:text-base"
+          onClick={() => getPosition()}
+        >
           <span className=" flex items-center justify-center gap-x-1 text-zinc-600 ">
             <FaLocationDot />
-            Add current Location
+            Get current Location
           </span>
         </Button>
 
