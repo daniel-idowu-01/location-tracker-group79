@@ -31,9 +31,7 @@ export function useReverseGeoCoding() {
           console.log(data);
 
           if (!data.countryCode)
-            throw new Error(
-              "That doesn't seem to be a city. Click somewhere a city",
-            );
+            throw new Error("That doesn't seem to be a city. Click a city");
 
           setCityName(data.city || data.locality || "");
           setCountry(data.countryName);

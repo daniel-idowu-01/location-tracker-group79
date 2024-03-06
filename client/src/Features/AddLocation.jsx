@@ -43,7 +43,7 @@ const AddLocation = () => {
   if (!lat && !lng) {
     return (
       <div className="p-4">
-        <div className="flex min-h-[250px] w-full items-center justify-center rounded-sm bg-gray-700 p-4 text-center text-zinc-100">
+        <div className="flex min-h-[250px] w-full items-center justify-center rounded-md bg-gray-700 p-4 text-center text-zinc-100">
           Start by clicking somewhere on the map
         </div>
       </div>
@@ -53,7 +53,7 @@ const AddLocation = () => {
   if (isLoadingGeocoding) {
     return (
       <div className="p-4">
-        <div className="flex min-h-[250px] w-full items-center justify-center rounded-sm bg-gray-700 p-4 text-center text-zinc-100">
+        <div className="flex min-h-[250px] w-full items-center justify-center rounded-md bg-gray-700 p-4 text-center text-zinc-100">
           Loading...
         </div>
       </div>
@@ -63,7 +63,7 @@ const AddLocation = () => {
   if (geocodingError) {
     return (
       <div className="p-4">
-        <div className="flex min-h-[250px] w-full items-center justify-center rounded-sm bg-gray-700 p-4 text-center text-zinc-100">
+        <div className="flex min-h-[250px] w-full items-center justify-center rounded-md bg-gray-700 p-4 text-center text-zinc-100">
           <span>{geocodingError}</span>
         </div>
       </div>
@@ -75,9 +75,9 @@ const AddLocation = () => {
       <h1 className="my-0 mb-2 text-zinc-100">Add Location Details</h1>
       <form
         onSubmit={handleSubmit}
-        className=" flex w-full flex-col items-start justify-between gap-y-3 rounded-sm bg-gray-700 p-3 text-sm font-medium text-zinc-100"
+        className=" flex w-full flex-col items-start justify-between gap-y-4 rounded-md bg-gray-700 p-3 text-sm font-medium text-zinc-100"
       >
-        <div className="relative w-full">
+        <div className="relative w-full space-y-[2px]">
           <label htmlFor="city">City Name</label>
           {/* <input
             type="text"
@@ -86,7 +86,7 @@ const AddLocation = () => {
             className="h-8 w-full rounded-sm bg-gray-300 text-zinc-700 focus:border-none"
             // value={cityName}
           /> */}
-          <div className="flex h-8 w-full items-center justify-between rounded-sm bg-gray-300 p-3 text-zinc-700">
+          <div className="flex h-8 w-full items-center justify-between rounded-md bg-gray-300 p-3 text-zinc-700">
             {" "}
             <p>
               {`${emoji} ${" "}`}
@@ -97,23 +97,23 @@ const AddLocation = () => {
           </div>
         </div>
 
-        <div className=" mb-4 flex h-8 w-full flex-col items-start justify-between rounded-sm">
+        <div className=" mb-4 flex h-8 w-full flex-col items-start justify-between space-y-[2px] rounded-md">
           <label htmlFor="notes">Date Visited</label>
           <DatePicker
             id="date"
             onChange={(date) => setDate(date)}
             selected={date}
             dateFormat="dd/MM/yyyy"
-            className="h-8 w-full rounded-sm border-gray-300 bg-gray-300 px-3 py-3 text-zinc-700 outline-none focus:border-blue-400"
+            className="h-8 w-full rounded-md border-gray-300 bg-gray-300 px-3 py-3 text-zinc-700 outline-none focus:border-blue-400"
           />
         </div>
-        <div>
+        <div className="space-y-[2px]">
           <label htmlFor="notes">Notes about visit to location</label>
           <textarea
             id="notes"
             onChange={(e) => setNote(e.target.value)}
             value={note}
-            className="w-full rounded-sm border-2 border-gray-300 bg-gray-300 px-3 py-2 text-zinc-700 placeholder-zinc-400 outline-none focus:border-blue-400 "
+            className="w-full rounded-md border-2 border-gray-300 bg-gray-300 px-3 py-2 text-zinc-700 placeholder-zinc-400 outline-none focus:border-blue-400 "
           ></textarea>
         </div>
 
@@ -123,7 +123,7 @@ const AddLocation = () => {
             onClick={() => navigate(-1)}
             className=" bg-gray-800 p-2 font-semibold hover:bg-gray-800"
           >
-            Back
+            &larr; Back
           </Button>
         </div>
       </form>
