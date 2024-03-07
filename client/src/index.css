@@ -5,3 +5,7 @@
 /* .active {
   @apply bg-slate-600 text-white hover:bg-slate-700;
 } */
+
+.react-datepicker-wrapper {
+  @apply h-8 w-full;
+}

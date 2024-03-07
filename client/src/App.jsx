@@ -3,6 +3,7 @@ import {
   Navigate,
   RouterProvider,
 } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
@@ -12,7 +13,8 @@ import AppLayout from "./ui/AppLayout";
 import Dashboard from "./Pages/Dashboard";
 import Destinations from "./Pages/Destinations";
 import Info from "./Pages/Info";
-import { Toaster } from "react-hot-toast";
+import CityDetail from "./Pages/CityDetail";
+import AddLocationsPage from "./Pages/AddLocationsPage";
 
 const App = () => {
   const route = createBrowserRouter([
@@ -39,7 +41,9 @@ const App = () => {
       children: [
         { index: true, element: <Navigate to="locations" /> },
         { path: "locations", element: <Destinations /> },
+        { path: "locations/:id", element: <CityDetail /> },
         { path: "info", element: <Info /> },
+        { path: "form", element: <AddLocationsPage /> },
       ],
     },
     {
