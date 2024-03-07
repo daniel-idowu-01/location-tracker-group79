@@ -8,7 +8,7 @@ const UserProfile = ({ className }) => {
         <FaUser />
       </div>
 
-      <p className={`text-sm md:text-base ${className}`}>Hello User</p>
+      <p className={`text-xs ${className}`}>Hello, John Doe</p>
     </div>
   );
 };
