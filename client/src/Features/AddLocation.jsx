@@ -44,7 +44,7 @@ const AddLocation = () => {
     return (
       <div className="p-4">
         <div className="flex min-h-[250px] w-full items-center justify-center rounded-md bg-gray-700 p-4 text-center text-zinc-100">
-          Start by clicking somewhere on the map
+          <p>Start by clicking somewhere on the map</p>
         </div>
       </div>
     );
@@ -54,7 +54,7 @@ const AddLocation = () => {
     return (
       <div className="p-4">
         <div className="flex min-h-[250px] w-full items-center justify-center rounded-md bg-gray-700 p-4 text-center text-zinc-100">
-          Loading...
+          <p>Loading...</p>
         </div>
       </div>
     );
@@ -63,8 +63,17 @@ const AddLocation = () => {
   if (geocodingError) {
     return (
       <div className="p-4">
-        <div className="flex min-h-[250px] w-full items-center justify-center rounded-md bg-gray-700 p-4 text-center text-zinc-100">
-          <span>{geocodingError}</span>
+        <div className="flex min-h-[200px] w-full flex-col items-center justify-center rounded-md bg-gray-700 p-4 text-center text-zinc-100">
+          <span className="mt-auto block">{geocodingError}</span>
+          <div className="ml-auto mt-auto">
+            {" "}
+            <Button
+              onClick={() => navigate(-1)}
+              className=" bg-gray-800 p-2 font-semibold hover:bg-gray-900"
+            >
+              &larr; Back
+            </Button>
+          </div>
         </div>
       </div>
     );
@@ -121,7 +130,7 @@ const AddLocation = () => {
           <Button className="p-2 font-semibold">Add</Button>
           <Button
             onClick={() => navigate(-1)}
-            className=" bg-gray-800 p-2 font-semibold hover:bg-gray-800"
+            className=" bg-gray-800 p-2 font-semibold hover:bg-gray-900"
           >
             &larr; Back
           </Button>
