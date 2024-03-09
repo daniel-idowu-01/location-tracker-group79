@@ -18,7 +18,7 @@ const Home = () => {
         {" "}
         <LinkButton
           label="Start Tracking Now"
-          to="dashboard"
+          to="dashboar"
           className="text-base font-semibold"
         />
       </div>

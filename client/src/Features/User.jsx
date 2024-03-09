@@ -3,6 +3,7 @@ import Button from "../ui/Button";
 import UserProfile from "../ui/UserProfile";
 import { FaTimes } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const User = () => {
   const [showUserProfile, setShowUserProfile] = useState(false);
@@ -46,9 +47,9 @@ const User = () => {
         <section className="flex flex-col gap-5 mt-5 text-zinc-300">
           {/* address */}
           <div>
-            <p className="text-xs pb-1 mb-2 border-b border-zinc-300">
+            <h3 className="text-m pb-1 mb-2 border-b border-zinc-300">
               Address
-            </p>
+            </h3>
             <article>
               <p className="text-xs">Lagos, Nigeria</p>
               <p className="text-base md:text-lg">20 Crown Road</p>
@@ -58,21 +59,23 @@ const User = () => {
 
           {/* contact */}
           <div>
-            <p className="text-xs pb-1 mb-2 border-b border-zinc-300">
+            <h3 className="text-m pb-1 mb-2 border-b border-zinc-300">
               Contact
-            </p>
+            </h3>
             <article>
               <p className="text-xs">Phone Number</p>
-              <p className="text-base md:text-lg">+234 802 374 8232</p>
+              <p className="text-base md:text-m">+234 802 374 8232</p>
               <p className="text-xs mt-2">E-mail</p>
-              <p className="text-base md:text-lg">johndoe@gmail.com</p>
+              <p className="text-base md:text-m">johndoe@gmail.com</p>
             </article>
           </div>
 
+          <Link to="/">
           <Button className="md:mt-3 h-10 w-full font-semibold uppercase text-zinc-50 md:h-10">
             Sign Out
             <FiLogOut className="ml-1 text-lg" />
           </Button>
+          </Link>
         </section>
 
         {/* <div className="mt-[60px] flex min-h-40 rounded-md bg-gray-700 text-center text-zinc-100 sm:min-h-80">
