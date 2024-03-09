@@ -15,6 +15,7 @@ import Destinations from "./Pages/Destinations";
 import Info from "./Pages/Info";
 import CityDetail from "./Pages/CityDetail";
 import AddLocationsPage from "./Pages/AddLocationsPage";
+import ForgotPassWordPage from "./Pages/ForgotPassWordPage";
 
 const App = () => {
   const route = createBrowserRouter([
@@ -32,6 +33,10 @@ const App = () => {
         {
           path: "register",
           element: <RegisterPage />,
+        },
+        {
+          path: "forgot-password",
+          element: <ForgotPassWordPage />,
         },
       ],
     },

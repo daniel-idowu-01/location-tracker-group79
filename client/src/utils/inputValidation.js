@@ -64,17 +64,19 @@ export const passwordValidator2 = (inputValue) => {
 };
 
 export const confirmPassWordValidator = (password) => {
-  (inputValue) => {
-    const trimmedValue = inputValue.trim();
-    if (!trimmedValue) {
-      return "confirm your password";
-    }
+  {
+    return (inputValue) => {
+      const trimmedValue = inputValue.trim();
+      if (!trimmedValue) {
+        return "confirm your password";
+      }
 
-    if (trimmedValue !== password) {
-      return "passwords do not match";
-    }
-    return "";
-  };
+      if (trimmedValue !== password) {
+        return "passwords do not match";
+      }
+      return "";
+    };
+  }
 };
 
 export const fullNameValidator = (inputValue) => {
