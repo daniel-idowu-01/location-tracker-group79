@@ -1,5 +1,9 @@
+import ErrorPage from "../Features/ErrorPage";
+
 const Error = () => {
-  return <div>Error</div>;
+  return (
+    <ErrorPage/>
+  );
 };
 
 export default Error;
