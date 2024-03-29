@@ -35,7 +35,6 @@ const VisitedLocations = () => {
         if (error.name === "AbortError") {
           console.log("Fetch aborted");
         } else {
-          console.error("Fetch failed", error);
           toast.error(error.message);
         }
       } finally {

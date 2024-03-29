@@ -24,12 +24,12 @@ const City = () => {
               <h1 className="space-x-1 text-base font-semibold">
                 <span>Exploring</span>{" "}
                 <span>
+                  {cityDetails.cityname} in {cityDetails.principality}{" "}
                   {convertToEmoji(cityDetails.countrycode)}{" "}
-                  {cityDetails.cityname}
                 </span>
               </h1>
               <p className="text-sm">
-                Here&apos;s your journey through this amazing city!
+                Here&apos;s your journey through this amazing city😊!
               </p>
             </div>
 

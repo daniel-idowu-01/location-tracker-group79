@@ -89,17 +89,13 @@ const Map = () => {
         <DetectClick />
       </MapContainer>
       {!position && (
-        <div className="absolute bottom-8 right-2 z-[1000]">
+        <div className="absolute bottom-8 left-4 z-[1000]">
           <Button
             onClick={() => getPosition()}
-            className="p-3 font-semibold text-gray-50"
+            className="p-3 font-medium text-gray-50 md:font-semibold"
             disabled={isLoading}
           >
-            {isLoading ? (
-              <Spinner className="h-6 w-6" />
-            ) : (
-              "Get Current Location"
-            )}
+            {isLoading ? <Spinner className="h-6 w-6" /> : "Get your Location"}
           </Button>
         </div>
       )}
