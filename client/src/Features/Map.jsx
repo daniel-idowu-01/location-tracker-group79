@@ -13,6 +13,10 @@ import { FaLocationDot } from "react-icons/fa6";
 import { useUrlPosition } from "../hooks/useUrlPosition";
 import Button from "../ui/Button";
 import User from "./User";
+import Logo from "../ui/Logo";
+import { useLocations } from "../hooks/useLocations";
+import { convertToEmoji } from "../utils/helper";
+import Spinner from "../ui/Spinner";
 
 const Map = () => {
   const [mapPosition, setMapPosition] = useState([
@@ -21,6 +25,7 @@ const Map = () => {
   const { isLoading, position, getPosition } = useGeolocation();
   const [mapLat, mapLng] = useUrlPosition();
   const navigate = useNavigate();
+  const { locations } = useLocations();
 
   useEffect(() => {
     if (mapLat && mapLng) setMapPosition([mapLat, mapLng]);
@@ -34,7 +39,10 @@ const Map = () => {
 
   return (
     <main className="relative h-[55%] w-full overflow-hidden bg-gray-800 md:h-full">
-      <div className="flex h-[50px] items-center justify-end gap-x-4 bg-white px-5 py-4 shadow-lg">
+      <div className="flex h-[60px] items-center justify-end gap-x-4 bg-white px-4 py-4 shadow-lg md:px-5">
+        <div className="mr-auto block md:hidden">
+          <Logo className="gap-x-1 font-bold text-gray-600" />
+        </div>
         {position && !isNaN(position.lat) && !isNaN(position.lng) && (
           <Button
             className="space-x-1 bg-inherit text-sm hover:bg-inherit md:text-base"
@@ -42,9 +50,9 @@ const Map = () => {
               navigate(`form?lat=${position.lat}&lng=${position.lng}`)
             }
           >
-            <span className="flex items-center justify-center gap-x-1 text-zinc-600">
+            <span className="ml-auto flex items-center justify-center gap-x-1 font-bold text-zinc-600">
               <FaLocationDot />
-              Add current Location
+              Add Location
             </span>
           </Button>
         )}
@@ -61,11 +69,22 @@ const Map = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
         />
-        <Marker position={mapPosition}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
+        {locations &&
+          locations.map((location) => (
+            <Marker
+              position={[
+                location.position.latitude,
+                location.position.longitude,
+              ]}
+              key={location.id}
+            >
+              <Popup>
+                <span>{convertToEmoji(location.countrycode)}</span>
+                <span>{location.cityname}</span>
+              </Popup>
+            </Marker>
+          ))}
+
         <CenterMapOnPosition position={mapPosition} />
         <DetectClick />
       </MapContainer>
@@ -73,10 +92,14 @@ const Map = () => {
         <div className="absolute bottom-8 right-2 z-[1000]">
           <Button
             onClick={() => getPosition()}
-            className="px-3 py-2 font-semibold"
+            className="p-3 font-semibold text-gray-50"
             disabled={isLoading}
           >
-            {isLoading ? "loading" : "Get Current Location"}
+            {isLoading ? (
+              <Spinner className="h-6 w-6" />
+            ) : (
+              "Get Current Location"
+            )}
           </Button>
         </div>
       )}
@@ -91,9 +114,12 @@ function CenterMapOnPosition({ position }) {
 
 function DetectClick() {
   const navigate = useNavigate();
+
   useMapEvents({
     click: (e) => {
-      navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`);
+      navigate(
+        `form?lat=${e.latlng.lat}&lng=${e.latlng.lng}&key=${e.latlng.lat}${e.latlng.lng}`,
+      );
     },
   });
 }

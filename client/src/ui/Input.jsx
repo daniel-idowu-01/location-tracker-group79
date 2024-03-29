@@ -70,7 +70,7 @@ const Input = ({
         onBlur={handleBlur}
         placeholder={placeHolder}
         disabled={disabled}
-        className={`h-10 w-full rounded-md border-2 border-gray-300 px-5 py-2 text-zinc-700 placeholder-zinc-400 outline-none focus:border-blue-400  ${className} ${error || errorMessage ? "border-red-400" : ""}`}
+        className={`h-10 w-full rounded-md border-2 border-gray-300 px-5 py-2 text-zinc-700 placeholder-zinc-400 outline-none focus:border-blue-400 disabled:cursor-not-allowed disabled:border-zinc-400  ${className} ${error || errorMessage ? "border-red-400" : ""}`}
       />
     </div>
   );

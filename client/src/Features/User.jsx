@@ -3,12 +3,21 @@ import Button from "../ui/Button";
 import UserProfile from "../ui/UserProfile";
 import { FaTimes } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth";
+// import useRefreshToken from "../hooks/useRefreshToken";
 
 const User = () => {
   const [showUserProfile, setShowUserProfile] = useState(false);
+  const { user, handleLogOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogOutClick = () => {
+    handleLogOut();
+    navigate("/login", { replace: true });
+  };
 
   const handleShowProfile = () => {
-    console.log("yes");
     setShowUserProfile(true);
   };
 
@@ -41,12 +50,11 @@ const User = () => {
           </Button>
         </div>
 
-
         {/*  */}
-        <section className="flex flex-col gap-5 mt-5 text-zinc-300">
+        <section className="mt-5 flex flex-col gap-5 text-zinc-300">
           {/* address */}
           <div>
-            <p className="text-xs pb-1 mb-2 border-b border-zinc-300">
+            <p className="mb-2 border-b border-zinc-300 pb-1 text-xs">
               Address
             </p>
             <article>
@@ -58,18 +66,21 @@ const User = () => {
 
           {/* contact */}
           <div>
-            <p className="text-xs pb-1 mb-2 border-b border-zinc-300">
+            <p className="mb-2 border-b border-zinc-300 pb-1 text-xs">
               Contact
             </p>
             <article>
               <p className="text-xs">Phone Number</p>
               <p className="text-base md:text-lg">+234 802 374 8232</p>
-              <p className="text-xs mt-2">E-mail</p>
-              <p className="text-base md:text-lg">johndoe@gmail.com</p>
+              <p className="mt-2 text-xs">E-mail</p>
+              <p className="text-base md:text-lg">{user.userEmail}</p>
             </article>
           </div>
 
-          <Button className="md:mt-3 h-10 w-full font-semibold uppercase text-zinc-50 md:h-10">
+          <Button
+            onClick={handleLogOutClick}
+            className="h-10 w-full font-semibold uppercase text-zinc-50 md:mt-3 md:h-10"
+          >
             Sign Out
             <FiLogOut className="ml-1 text-lg" />
           </Button>
