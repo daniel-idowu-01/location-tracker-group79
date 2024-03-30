@@ -1,6 +1,6 @@
 import { Outlet, useNavigate } from "react-router-dom";
 
-import bgImage from "./../public/assets/bgImage.jpg";
+import bgImage from "/assets/bgImage.jpg";
 import Logo from "./Logo";
 import { useAuth } from "../hooks/useAuth";
 import Button from "./Button";
