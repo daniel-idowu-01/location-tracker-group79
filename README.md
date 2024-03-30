@@ -9,4 +9,4 @@ Paw Prints is a web application designed to help users keep track of their visit
 - [Idowu Daniel](https://github.com/daniel-idowu-01)
 - [Aulex ](https://github.com/au-lex)
 - [Harcourt J. Ayebatari](https://github.com/opuindy)
-- [Ann CHizaram Nwachukwu](https://github.com/Z-annie)
+- [Ann Chizaram Nwachukwu](https://github.com/Z-annie)
