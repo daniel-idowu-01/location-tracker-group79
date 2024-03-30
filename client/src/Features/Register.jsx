@@ -1,6 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import Input from "../ui/Input";
-import Button from "../ui/Button";
 import { FaTimes } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import {
@@ -9,6 +7,13 @@ import {
   fullNameValidator,
   passwordValidator2,
 } from "../utils/inputValidation";
+
+import Input from "../ui/Input";
+import Button from "../ui/Button";
+import axios from "./../auth/axiosConfig";
+import toast from "react-hot-toast";
+import { useAuth } from "../hooks/useAuth";
+import Spinner from "../ui/Spinner";
 
 const Register = () => {
   const [fullName, setFullName] = useState("");
@@ -20,10 +25,13 @@ const Register = () => {
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [isMounted, setIsMounted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+
+  const { setUser } = useAuth();
   const navigate = useNavigate();
 
   const handlefullNameChange = (e) => {
-    setFullName(e.target.value.trim());
+    setFullName(e.target.value);
   };
 
   const handleEmailChange = (e) => {
@@ -37,7 +45,7 @@ const Register = () => {
     setConfirmPassword(e.target.value.trim());
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const fullNameErrorResult = fullNameValidator(fullName);
@@ -67,17 +75,33 @@ const Register = () => {
     }
 
     const newUser = {
-      fullName,
+      full_name: fullName,
       email,
       password,
-      confirmPassword,
     };
-    console.log(newUser);
-    setFullName("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
-    navigate("/dashboard");
+
+    try {
+      setSubmitting(true);
+      const response = await axios.post("/auth/register", newUser, {
+        headers: { "Content-Type": "application/json" },
+      });
+
+      setUser({
+        userId: response.data.data.id,
+        fullName: response.data.data.full_name,
+        email: response.data.data.email,
+      });
+      toast.success("Registration successfull, please login");
+      setFullName("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+      navigate("/login");
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   useEffect(() => {
@@ -123,7 +147,9 @@ const Register = () => {
             value={fullName}
             onChange={handlefullNameChange}
             errorMessage={fullNameError}
+            disabled={submitting}
           />
+
           <Input
             label="Email"
             placeHolder="abc@abc.com"
@@ -133,6 +159,7 @@ const Register = () => {
             value={email}
             onChange={handleEmailChange}
             errorMessage={emailError}
+            disabled={submitting}
           />
           <Input
             label="Password"
@@ -143,6 +170,7 @@ const Register = () => {
             value={password}
             onChange={handlePasswordChange}
             errorMessage={passwordError}
+            disabled={submitting}
           />
           <Input
             label="Confirm Password"
@@ -153,10 +181,14 @@ const Register = () => {
             value={confirmPassword}
             onChange={handleConfirmPasswordChange}
             errorMessage={confirmPasswordError}
+            disabled={submitting}
           />
 
-          <Button className="mt-6 h-10 w-full font-semibold uppercase text-zinc-50 md:h-10">
-            Register
+          <Button
+            className="mt-6 h-10 w-full font-semibold uppercase text-zinc-50 md:h-10"
+            disabled={submitting}
+          >
+            {submitting ? <Spinner className="h-4 w-4" /> : "Register"}
           </Button>
         </form>
       </div>

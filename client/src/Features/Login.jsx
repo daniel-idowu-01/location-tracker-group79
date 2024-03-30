@@ -1,11 +1,16 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FaTimes } from "react-icons/fa";
+
+import { emailValidator, passwordValidator } from "../utils/inputValidation";
 
 import Input from "../ui/Input";
 import Button from "../ui/Button";
-
-import { emailValidator, passwordValidator } from "../utils/inputValidation";
-import { useEffect, useState } from "react";
+import axios from "../auth/axiosConfig";
+import toast from "react-hot-toast";
+import { useAuth } from "../hooks/useAuth";
+import useSessionStorage from "../hooks/useSessionStorage";
+import Spinner from "../ui/Spinner";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -13,8 +18,13 @@ const Login = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [isMounted, setIsMounted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
+  const [, setUserData] = useSessionStorage("user", `{}`);
+  const { setUser } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value.trim());
@@ -23,7 +33,7 @@ const Login = () => {
     setPassword(e.target.value.trim());
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const emailErrorResult = emailValidator(email);
     const passErrorResult = passwordValidator(password);
@@ -37,11 +47,30 @@ const Login = () => {
 
     const user = { email, password };
 
-    console.log(user);
-
-    setEmail("");
-    setPassword("");
-    navigate("/dashboard");
+    try {
+      setLoading(true);
+      const response = await axios.post("/auth/login", user, {
+        headers: { "Content-Type": "application/json" },
+      });
+      const userData = {
+        id: 1,
+        userId: response.data.data.user.id,
+        userName: response.data.data.user.full_name,
+        userEmail: response.data.data.user.email,
+        accessToken: response.data.data.access_token,
+      };
+      toast.success("Login successful");
+      setUser(userData);
+      setUserData(userData);
+      // sessionStorage.setItem("user", JSON.stringify(userData));
+      setEmail("");
+      setPassword("");
+      navigate(from, { replace: true });
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -80,11 +109,12 @@ const Login = () => {
             label="Email"
             placeHolder="abc@abc.com"
             type="email"
-            validateOnBlur={true}
+            // validateOnBlur={true}
             validateFunction={emailValidator}
             value={email}
             onChange={handleEmailChange}
             errorMessage={emailError}
+            disabled={loading}
           />
           <Input
             label="Password"
@@ -95,9 +125,13 @@ const Login = () => {
             value={password}
             onChange={handlePasswordChange}
             errorMessage={passwordError}
+            disabled={loading}
           />
-          <Button className="mt-6 h-10 w-full font-semibold uppercase text-zinc-50 md:h-10">
-            Login
+          <Button
+            className="mt-6 h-10 w-full font-semibold uppercase text-zinc-50 md:h-10"
+            disabled={loading}
+          >
+            {loading ? <Spinner className="h-4 w-4" /> : "Login"}
           </Button>
         </form>
         <Link

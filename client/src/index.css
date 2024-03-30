@@ -9,3 +9,23 @@
 .react-datepicker-wrapper {
   @apply h-8 w-full;
 }
+
+.leaflet-popup .leaflet-popup-content-wrapper {
+  @apply rounded bg-gray-800 pl-2;
+}
+
+.leaflet-popup .leaflet-popup-content {
+  @apply flex items-center gap-2 text-base text-zinc-300;
+}
+
+.leaflet-popup .leaflet-popup-content span:first-child {
+  @apply text-2xl;
+}
+
+.leaflet-popup .leaflet-popup-tip {
+  @apply bg-gray-800 pl-2;
+}
+
+.leaflet-popup-content-wrapper {
+  @apply border-l-4 border-blue-500;
+}
