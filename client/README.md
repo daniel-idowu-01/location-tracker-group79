@@ -64,5 +64,4 @@ To run the application locally, follow these steps:
 - [Idowu Daniel](https://github.com/daniel-idowu-01)
 - [Aulex ](https://github.com/au-lex)
 - [Harcourt J. Ayebatari](https://github.com/opuindy)
-- [Ann CHizaram Nwachukwu](https://github.com/Z-annie)
-  git
+- [Ann Chizaram Nwachukwu](https://github.com/Z-annie)
