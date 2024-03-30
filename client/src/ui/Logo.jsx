@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
-import pawLogo from "./../public/assets/pawLogo.png";
+import pawLogo from "/assets/pawLogo.png";
 
 const Logo = ({ className }) => {
   return (
