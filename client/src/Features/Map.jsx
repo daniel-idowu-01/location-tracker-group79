@@ -60,7 +60,7 @@ const Map = () => {
       </div>
       <MapContainer
         center={mapPosition}
-        zoom={8}
+        zoom={7}
         scrollWheelZoom={true}
         className=""
         style={{ height: "calc(100% - 50px)", position: "relative" }}

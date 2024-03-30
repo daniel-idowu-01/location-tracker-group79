@@ -12,7 +12,7 @@ const useRefreshToken = () => {
       throw new Error("Please login to access application");
     }
 
-    const response = await axios.post("/auth/token/refresh", { token });
+    const response = await axios.post("/auth/token/refresh", { token: token });
     const newAccessToken = response.data.data.access_token;
 
     if (user.userName && user.id) {

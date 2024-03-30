@@ -37,7 +37,7 @@ const AddLocation = () => {
     if (!cityName || !date) return;
 
     const newCity = {
-      cityname: city,
+      cityname: city || cityName,
       country,
       note,
       date,
